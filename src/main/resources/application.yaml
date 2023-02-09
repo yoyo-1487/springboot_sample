@@ -1,0 +1,27 @@
+server:
+  port: 9800 # ????port?
+
+
+
+# For MySQL connection
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/menu
+    username: root
+    password: 1234
+
+  http:
+    encoding:
+      force=true:
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+jpa:
+#  hibernate.ddl-auto: update
+  generate-ddl: true
+  show-sql: true
+  properties:
+    hibernate:
+      format_sql: true
