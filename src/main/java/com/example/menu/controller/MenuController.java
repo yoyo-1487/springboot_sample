@@ -19,12 +19,12 @@ public class MenuController {
     OrderService orderService;
     //------------拿到菜單------------
     @GetMapping("/getmenu")
-    public Iterable<MenuEntity> findMenuAll () {
-        return menuService.getMenuAll();
+    public List<MenuEntity> findMenuAll () {
+        return (List)menuService.getMenuAll();
     }
     //------------得到訂單資料(項目,數量)------------
     @GetMapping("/getorder")
-    public List<SetItemAmount> getOrderList () {
+    public  HashMap<String, Integer> getOrderList () {
         return orderService.getOrderItemAndNumber();
     }
     //------------找菜單是否有此品項並點餐------------

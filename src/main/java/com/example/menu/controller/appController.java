@@ -3,6 +3,8 @@ package com.example.menu.controller;
 
 
 import com.example.menu.object.Person;
+import com.example.menu.service.MenuService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,8 @@ import java.util.List;
 
 @Controller
 public class appController {
+    @Autowired
+    MenuService menuService;
     @GetMapping("/hello")
     public String hello(Model model){
         model.addAttribute("hello", "Hello World!!!");
@@ -45,5 +49,4 @@ public class appController {
         model.addAttribute("person", person);
         return "add";
     }
-
 }
