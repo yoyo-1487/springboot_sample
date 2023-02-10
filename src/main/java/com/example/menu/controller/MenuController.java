@@ -1,8 +1,8 @@
 package com.example.menu.controller;
 
 import com.example.menu.controller.request.AddInformationToMenuCommand;
-import com.example.menu.entity.MenuEntity;
-import com.example.menu.entity.SetItemAmountEntity;
+import com.example.menu.model.entity.MenuEntity;
+import com.example.menu.object.SetItemAmount;
 import com.example.menu.service.MenuService;
 import com.example.menu.service.OrderService;
 
@@ -17,25 +17,24 @@ public class MenuController {
     MenuService menuService;
     @Autowired
     OrderService orderService;
-    public int totalprice=0;
-    //------------拿到菜單------------ok
+    //------------拿到菜單------------
     @GetMapping("/getmenu")
-    public Iterable<MenuEntity> findMenu_all () {
-        return menuService.getMenu_all_service();
+    public Iterable<MenuEntity> findMenuAll () {
+        return menuService.getMenuAll();
     }
-    //------------
+    //------------得到訂單資料(項目,數量)------------
     @GetMapping("/getorder")
-    public List<SetItemAmountEntity> getOrderList () {
-        return orderService.getOrder_all();
+    public List<SetItemAmount> getOrderList () {
+        return orderService.getOrderItemAndNumber();
     }
-    //------------找菜單是否有此品項並點餐------------ok
+    //------------找菜單是否有此品項並點餐------------
     @PostMapping("/find_and_order")
-    public String find_and_order(@RequestBody AddInformationToMenuCommand command){
-        return menuService.find_and_order(command.getItems());
+    public String findAndOrder(@RequestBody AddInformationToMenuCommand command){
+        return menuService.findAndOrder(command.getItems());
     }
-    //------------
+    //------------得到訂單總金額------------
     @GetMapping("/totalprice")
-    public Integer totalprice(){
-        return menuService.totalprice();
+    public Integer totalPrice(){
+        return menuService.totalPrice();
     }
 }

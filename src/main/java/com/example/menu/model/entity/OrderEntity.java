@@ -1,4 +1,4 @@
-package com.example.menu.entity;
+package com.example.menu.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -13,10 +13,10 @@ import lombok.ToString;
 public class OrderEntity {
     @Id
     @Column(name = "order_id")
-    private String order_id;
+    private String orderId;
     @Column
-    private String order_item;
+    private String orderItem;
     @Column
-    private Integer order_price;
+    private Integer orderPrice;
 }
 
