@@ -96,10 +96,9 @@ public class OrderAggregate {
 //        return setItemAndAmount;
 //    }
     //--------------------------------------------------------
-public Integer countPrice(){
-        List<OrderEntity> order = orderDao.findAll();
+public Integer countPrice(List<OrderEntity> orderListAll){
         int totalprice=0;
-        for(OrderEntity orderentity:order){
+        for(OrderEntity orderentity:orderListAll){
             totalprice += orderentity.getOrderPrice();
         }
         return totalprice;

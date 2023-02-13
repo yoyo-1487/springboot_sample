@@ -23,7 +23,8 @@ public class OrderService {
 
     //
     public Integer countPrice(){
-        return orderAggregate.countPrice();
+        List<OrderEntity> orderListAll = orderAggregate.getOrderAll();//1.撈出訂單所有資料
+        return orderAggregate.countPrice(orderListAll);
     }
 
 }
