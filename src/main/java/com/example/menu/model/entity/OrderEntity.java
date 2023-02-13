@@ -1,13 +1,9 @@
 package com.example.menu.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
-@Getter
-@Setter
-@ToString
+@Data
 @Entity
 @Table(name="order_table")
 public class OrderEntity {

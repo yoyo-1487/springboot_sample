@@ -14,11 +14,16 @@ import java.util.Set;
 public class OrderService {
     @Autowired
     OrderAggregate  orderAggregate;
+
     //------------得到訂單資料(項目,數量)------------
-    public  HashMap<String, Integer> getOrderItemAndNumber() {
+    public HashMap<String, Integer> getOrderItemAndNumber() {
         List<OrderEntity> orderListAll = orderAggregate.getOrderAll();//1.撈出訂單所有資料
         return orderAggregate.findObjectAndCountAmount(orderListAll);//2.找出訂單有哪些種類,並累加數量
-//        return orderAggregate.setItemAndAmount(findItem);//3.將品項及數量塞進List
+    }
+
+    //
+    public Integer countPrice(){
+        return orderAggregate.countPrice();
     }
 
 }

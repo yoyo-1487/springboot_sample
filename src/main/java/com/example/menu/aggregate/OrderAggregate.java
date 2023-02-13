@@ -3,6 +3,7 @@ package com.example.menu.aggregate;
 import com.example.menu.model.dao.OrderDao;
 import com.example.menu.model.entity.OrderEntity;
 import com.example.menu.object.SetItemAmount;
+import com.example.menu.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -11,14 +12,17 @@ import java.util.*;
 
 @Repository
 public class OrderAggregate {
-    private int cuisineNum = 0;//炒時蔬
-    private int eggswithtomatoesNum = 0;//番茄炒蛋
-    private int porkbeancurdsNum = 0;//豆干肉絲
+//    private int cuisineNum = 0;//炒時蔬
+//    private int eggswithtomatoesNum = 0;//番茄炒蛋
+//    private int porkbeancurdsNum = 0;//豆干肉絲
 
     @Autowired
     OrderDao orderDao;
 
-    //------------撈出訂單所有資料------------
+    /**
+     * 撈出訂單所有資料
+     * @return 菜單
+     */
     public List<OrderEntity> getOrderAll() {
         return orderDao.findAll();
     }
@@ -36,14 +40,15 @@ public class OrderAggregate {
 //        porkbeancurdsNum = 0;//豆干肉絲
 
         HashMap<String, Integer> itemsMap = new HashMap<>();
-        for (OrderEntity orderEntity : orderListAll) { //撈出訂單table的菜單
-            String orderItem = orderEntity.getOrderItem(); //取出菜單的名稱
-            if (itemsMap.containsKey(orderItem)) { //如果菜單已經存在我的集合，那就把它原本的數量做+1
+        for (OrderEntity orderEntity : orderListAll) { //---撈出訂單table的菜單
+            String orderItem = orderEntity.getOrderItem(); //---取出菜單的名稱
+            if (itemsMap.containsKey(orderItem)) { //---如果菜單已經存在我的集合，那就把它原本的數量做+1
                 itemsMap.put(orderItem, itemsMap.get(orderItem) + 1);
-            } else { //第一次找到，就做初始化的動作
+            } else { //---第一次找到，就做初始化的動作
                 itemsMap.put(orderItem, 1);
             }
         }
+
 
 //        itemsMap.forEach((key,value) ->{
 //            System.out.println("key = " + key);
@@ -91,5 +96,13 @@ public class OrderAggregate {
 //        return setItemAndAmount;
 //    }
     //--------------------------------------------------------
+public Integer countPrice(){
+        List<OrderEntity> order = orderDao.findAll();
+        int totalprice=0;
+        for(OrderEntity orderentity:order){
+            totalprice += orderentity.getOrderPrice();
+        }
+        return totalprice;
+}
 
 }

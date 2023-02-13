@@ -1,15 +1,11 @@
 package com.example.menu.model.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 
 @Entity
 @Table(name="menu_table")
-@Getter
-@Setter
-@ToString
+@Data
 public class MenuEntity {
     @Id
     @Column

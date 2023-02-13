@@ -17,15 +17,29 @@ public class MenuAggregate {
     MenuDao menuDao;
     @Autowired
     OrderDao orderDao;
-    //------------查詢菜單------------
+
+    /**
+     * 查詢菜單
+     * @return 菜單品項
+     */
     public Iterable<MenuEntity> getMenuAll() {
         return menuDao.findAll();
     }
-    //------------接值------------
+
+    /**
+     * 接值
+     * @param item 品項名稱
+     * @return 品項資料
+     */
     public Optional<MenuEntity> findMenuByItem (String item){
         return menuDao.findById(item);
     }
-    //------------判斷品項存在並加入------------
+
+    /**
+     * 判斷品項存在並加入
+     * @param item 輸入品項的資料
+     * @return 成功點餐資訊
+     */
     public String existThenOrder (Optional<MenuEntity> item){
         if(item.isEmpty()){
             return "不存在";
@@ -40,9 +54,13 @@ public class MenuAggregate {
             return "成功點餐,餐點為:" + item.get().getItems() + ",價格:" + item.get().getPrice();
         }
     }
-    //------------加總金額------------
+
+    /**
+     * 加總金額
+     * @return 總金額
+     */
     public Integer totalPrice(){
         return totalPrice;
     }
-    //--------------------------------------------------------
+
 }
