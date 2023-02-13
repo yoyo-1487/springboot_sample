@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Person {
-    private String name;
-    private String password;
+
+  private String name;
+  private String password;
 }

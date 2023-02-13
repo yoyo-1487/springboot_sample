@@ -8,6 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class SetItemAmount {
-    private String Item;
-    private Integer Amount;
+
+  private String Item;
+  private Integer Amount;
 }

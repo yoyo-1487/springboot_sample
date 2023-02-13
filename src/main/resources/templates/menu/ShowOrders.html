@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <h1>訂單</h1>
+  <meta charset="UTF-8">
+  <title>showOrders</title>
+</head>
+<body>
+<h2 th:text="'訂單金額 : ' + ${totalprice}"></h2>
+<table border="1">
+  <tr>
+    <th>菜名</th>
+    <th>數量</th>
+  </tr>
+  <!--用th:each接收一個可迭代的物件，將thymeleaf傳遞過來的參數"findMenuAll"，別名為menu-->
+  <tr th:each="order:${getOrderList}">
+    <td th:text="${order.key}"></td>
+    <td th:text="${order.value}"></td>
+  </tr>
+</table>
+
+</body>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>AddInformationToMenuCommand</title>
+</head>
+<body>
+<h2>Add Form</h2>
+<form action="#" th:action="@{/andOrder}" th:object="${addInformationToMenuCommand}" method="post">
+  <input type="text" th:field="*{items}"/>
+  <input type="submit"/>
+</form>
+</body>
+</html>
