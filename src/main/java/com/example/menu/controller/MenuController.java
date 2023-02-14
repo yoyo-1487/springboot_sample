@@ -37,9 +37,9 @@ public class MenuController {
   //------------找菜單是否有此品項並點餐------------
   @PostMapping("/find")
   public String form(Model model) {
-    AddInformationToMenuCommand addInformationToMenuCommand = new AddInformationToMenuCommand();//實體化
-    model.addAttribute("addInformationToMenuCommand", addInformationToMenuCommand);
-    return "menu/AddInformationToMenuCommand"; // 導至find.html
+    AddInformationToMenuCommand addInformationToMenu = new AddInformationToMenuCommand();//實體化
+    model.addAttribute("addInformationToMenu", addInformationToMenu);
+    return "menu/AddInformationToMenu"; // 導至find.html
   }
 
   @PostMapping("/andOrder")

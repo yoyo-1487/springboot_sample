@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>點餐</h2>
-<form th:action="@{/andOrder}" th:object="${addInformationToMenuCommand}" method="post">
+<form th:action="@{/andOrder}" th:object="${addInformationToMenu}" method="post">
   <input type="text" th:field="*{items}"/>
   <input type="submit" value="點餐">
 </form>
