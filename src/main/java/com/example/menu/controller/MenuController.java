@@ -1,7 +1,6 @@
 package com.example.menu.controller;
 
 import com.example.menu.controller.request.AddInformationToMenuCommand;
-import com.example.menu.object.Person;
 import com.example.menu.service.MenuService;
 import com.example.menu.service.OrderService;
 
@@ -19,7 +18,7 @@ public class MenuController {
   OrderService orderService;
 
   //------------拿到菜單------------
-  @GetMapping("/getmenu")
+  @PostMapping("/getmenu")
   public String findMenuAll(Model model) {//List<MenuEntity>
     model.addAttribute("findMenuAll", menuService.getMenuAll());
     return "menu/ShowMenu";
@@ -27,7 +26,7 @@ public class MenuController {
   }
 
   //------------得到訂單資料(項目,數量)------------
-  @GetMapping("/getorder")
+  @PostMapping("/getorder")
   public String getOrderList(Model model) {//HashMap<String, Integer>
     model.addAttribute("getOrderList", orderService.getOrderItemAndNumber());//訂單名稱跟數量
     model.addAttribute("totalprice", orderService.countPrice());//訂單金額
@@ -36,21 +35,25 @@ public class MenuController {
   }
 
   //------------找菜單是否有此品項並點餐------------
-  @GetMapping("/find")
+  @PostMapping("/find")
   public String form(Model model) {
     AddInformationToMenuCommand addInformationToMenuCommand = new AddInformationToMenuCommand();//實體化
     model.addAttribute("addInformationToMenuCommand", addInformationToMenuCommand);
-    return "menu/AddInformationToMenuCommand"; // 導至form.html
+    return "menu/AddInformationToMenuCommand"; // 導至find.html
   }
+
   @PostMapping("/andOrder")
-  public String findAndOrder(@ModelAttribute AddInformationToMenuCommand addInformationToMenuCommand, Model model) {//@RequestBody AddInformationToMenuCommand command
-    model.addAttribute("addInformationToMenuCommand", menuService.findAndOrder((addInformationToMenuCommand.getItems())));
+  public String findAndOrder(
+      @ModelAttribute AddInformationToMenuCommand addInformationToMenuCommand,
+      Model model) {//@RequestBody AddInformationToMenuCommand command
+    model.addAttribute("addInformationToMenuCommand",
+        menuService.findAndOrder((addInformationToMenuCommand.getItems())));
     return "menu/AndOrder";
     //return menuService.findAndOrder(command.getItems());
   }
 
   //-----------得到訂單總金額------------
-  @GetMapping("/countprice")
+  @PostMapping("/countprice")
   public String countPrice(Model model) {//Integer
     model.addAttribute("totalprice", orderService.countPrice());
     return "menu/ShowPrice";

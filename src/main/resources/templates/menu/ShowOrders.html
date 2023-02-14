@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <h1>訂單</h1>
+  <h2>訂單</h2>
   <meta charset="UTF-8">
   <title>showOrders</title>
 </head>
 <body>
-<h2 th:text="'訂單金額 : ' + ${totalprice}"></h2>
+<h3 th:text="'訂單金額 : ' + ${totalprice}"></h3>
 <table border="1">
   <tr>
     <th>菜名</th>
@@ -18,6 +18,11 @@
     <td th:text="${order.value}"></td>
   </tr>
 </table>
+<br>
+
+<form th:action="@{/home}" method="post">
+  <button type="submit" value="回首頁">回首頁</button>
+</form>
 
 </body>
 </body>

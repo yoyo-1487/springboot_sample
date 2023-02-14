@@ -7,5 +7,12 @@
 <body>
 <h1>顯示資料</h1>
 <p th:text="${addInformationToMenuCommand}"></p>
+<form th:action="@{/find}" method="post">
+  <button type="submit" value="繼續點餐">繼續點餐</button>
+</form>
+<br>
+<form th:action="@{/home}" method="post">
+  <button type="submit" value="回首頁">回首頁</button>
+</form>
 </body>
 </html>

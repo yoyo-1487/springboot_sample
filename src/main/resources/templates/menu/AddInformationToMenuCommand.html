@@ -5,10 +5,14 @@
   <title>AddInformationToMenuCommand</title>
 </head>
 <body>
-<h2>Add Form</h2>
-<form action="#" th:action="@{/andOrder}" th:object="${addInformationToMenuCommand}" method="post">
+<h2>點餐</h2>
+<form th:action="@{/andOrder}" th:object="${addInformationToMenuCommand}" method="post">
   <input type="text" th:field="*{items}"/>
-  <input type="submit"/>
+  <input type="submit" value="點餐">
+</form>
+<br>
+<form th:action="@{/home}" method="post">
+  <button type="submit" value="回首頁">回首頁</button>
 </form>
 </body>
 </html>

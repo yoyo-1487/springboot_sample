@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-  <h1>菜單</h1>
+  <h2>菜單</h2>
   <meta charset="UTF-8">
   <title>ShowMenu</title>
 </head>
@@ -17,5 +17,11 @@
     <td th:text="${menu.price}"></td>
   </tr>
 </table>
+<br>
+
+<form th:action="@{/home}" method="post">
+  <button type="submit" value="回首頁">回首頁</button>
+</form>
+
 </body>
 </html>

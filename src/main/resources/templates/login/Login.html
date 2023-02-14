@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<body>
+<h1>會員登入</h1>
+<form th:action="@{/home}" th:object="${insertAccountPassword}" method="post">
+  <label>帳號/Email</label>
+  <input type="text" th:field="*{account}">
+  <label>密碼</label>
+  <input type="password" th:field="*{password}">
+  <input type="submit" value="登入">
+</form>
+</body>
+</html>
