@@ -44,10 +44,10 @@ public class MenuController {
 
   @PostMapping("/andOrder")
   public String findAndOrder(
-      @ModelAttribute AddInformationToMenuCommand addInformationToMenuCommand,
+      @ModelAttribute AddInformationToMenuCommand addInformationToMenu,
       Model model) {//@RequestBody AddInformationToMenuCommand command
-    model.addAttribute("addInformationToMenuCommand",
-        menuService.findAndOrder((addInformationToMenuCommand.getItems())));
+    model.addAttribute("addInformationToMenu",
+        menuService.findAndOrder((addInformationToMenu.getItems())));
     return "menu/AndOrder";
     //return menuService.findAndOrder(command.getItems());
   }

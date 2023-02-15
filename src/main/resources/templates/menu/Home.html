@@ -6,18 +6,34 @@
 </head>
 <body>
 <div>
+  <h1>顯示帳號密碼資料</h1>
+  <div th:if="${insertAccountPassword != null}">
+    <p th:text="'帳號為:'+${insertAccountPassword.username}"></p>
+    <p th:text="'密碼為:'+${insertAccountPassword.password}"></p>
+  </div>
+  <div th:if="${insertAccountPassword == null}">
+    <p>帳號或密碼錯誤</p>
+  </div>
+</div>
+<div>
   <h2>首頁</h2>
-  <form th:action="@{/getmenu}" method="post">
-    <button type="submit" value="查看菜單">查看菜單</button>
-  </form>
+  <div>
+    <form th:action="@{/getmenu}" method="post">
+      <button type="submit" value="查看菜單">查看菜單</button>
+    </form>
+  </div>
   <br>
-  <form th:action="@{/getorder}" method="post">
-    <button type="submit" value="我的訂單">我的訂單</button>
-  </form>
+  <div>
+    <form th:action="@{/getorder}" method="post">
+      <button type="submit" value="我的訂單">我的訂單</button>
+    </form>
+  </div>
   <br>
-  <form th:action="@{/find}" method="post">
-    <button type="submit" value="點餐">點餐</button>
-  </form>
+  <div>
+    <form th:action="@{/find}" method="post">
+      <button type="submit" value="點餐">點餐</button>
+    </form>
+  </div>
 </div>
 </body>
 </html>

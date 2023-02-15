@@ -50,8 +50,8 @@ public class AppController {
   }
 
   @PostMapping("/add")
-  public String add(@ModelAttribute Person person, Model model) {
-    model.addAttribute("person", person);
+  public String add(@ModelAttribute Person person111, Model model) {
+    model.addAttribute("person111", person111);
     return "test/add";
   }
 }
