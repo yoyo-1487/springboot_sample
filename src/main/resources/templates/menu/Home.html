@@ -7,18 +7,13 @@
 <body>
 <div>
   <h1>顯示帳號密碼資料</h1>
-  <div th:if="${insertAccountPassword != null}">
-    <p th:text="'帳號為:'+${insertAccountPassword.username}"></p>
-    <p th:text="'密碼為:'+${insertAccountPassword.password}"></p>
-  </div>
-  <div th:if="${insertAccountPassword == null}">
-    <p>帳號或密碼錯誤</p>
-  </div>
+  <p th:text="'帳號為:'+${insertAccountPassword.username}"></p>
+  <p th:text="'密碼為:'+${insertAccountPassword.password}"></p>
 </div>
 <div>
   <h2>首頁</h2>
   <div>
-    <form th:action="@{/getmenu}" method="post">
+    <form th:action="@{/getmenu}" th:object="${insertAccountPassword}" method="post">
       <button type="submit" value="查看菜單">查看菜單</button>
     </form>
   </div>
