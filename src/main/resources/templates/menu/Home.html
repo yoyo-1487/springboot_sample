@@ -7,26 +7,34 @@
 <body>
 <div>
   <h1>顯示帳號密碼資料</h1>
-  <p th:text="'帳號為:'+${insertAccountPassword.username}"></p>
-  <p th:text="'密碼為:'+${insertAccountPassword.password}"></p>
+  <p th:text="'帳號為:'+${showAccountPassword.username}"></p>
+  <p th:text="'密碼為:'+${showAccountPassword.password}"></p>
 </div>
 <div>
   <h2>首頁</h2>
   <div>
-    <form th:action="@{/getmenu}" th:object="${insertAccountPassword}" method="post">
-      <button type="submit" value="查看菜單">查看菜單</button>
+    <form action="#" th:action="@{/getmenu}" th:object="${showAccountPassword}" method="get">
+      <input type="hidden" th:field="*{username}"/>
+      <input type="hidden" th:field="*{password}"/>
+      <input type="submit" value="查看菜單"/>
+    </form>
+  </div>
+
+
+  <br>
+  <div>
+    <form action="#" th:action="@{/getorder}" th:object="${showAccountPassword}" method="get">
+      <input type="hidden" th:field="*{username}"/>
+      <input type="hidden" th:field="*{password}"/>
+      <input type="submit" value="我的訂單">
     </form>
   </div>
   <br>
   <div>
-    <form th:action="@{/getorder}" method="post">
-      <button type="submit" value="我的訂單">我的訂單</button>
-    </form>
-  </div>
-  <br>
-  <div>
-    <form th:action="@{/find}" method="post">
-      <button type="submit" value="點餐">點餐</button>
+    <form action="#" th:action="@{/find}" th:object="${showAccountPassword}" method="get">
+      <input type="hidden" th:field="*{username}"/>
+      <input type="hidden" th:field="*{password}"/>
+      <input type="submit" value="點餐">
     </form>
   </div>
 </div>

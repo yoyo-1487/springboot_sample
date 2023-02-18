@@ -1,9 +1,11 @@
 package com.example.menu.controller;
 
-import com.example.menu.controller.request.AddInformationToMenuCommand;
 import com.example.menu.controller.request.InsertAccountandPasswordToLoginCommand;
+import com.example.menu.model.dao.LoginDao;
 import com.example.menu.model.entity.AccountEntity;
 import com.example.menu.service.LoginService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,8 @@ public class LoginController {
 
   @Autowired
   LoginService loginService;
+  @Autowired
+  private LoginDao loginDao;
 
   @GetMapping({"/", "/login"})
   public String login(Model model) {
@@ -35,23 +39,36 @@ public class LoginController {
 //    return "login/LoginShow";
 //  }
 
-  @PostMapping("/home")
-  public String home(@ModelAttribute InsertAccountandPasswordToLoginCommand insertAccountPassword,
-      Model model) {
+  @GetMapping("/home")
+  public String home(
+      @ModelAttribute InsertAccountandPasswordToLoginCommand insertAccountPassword,
+      Model model,
+      HttpServletRequest request
+  ) {
+    AccountEntity accountEntity = new AccountEntity();
+    HttpSession session = request.getSession();
+    String account = insertAccountPassword.getAccount();
+    String password = insertAccountPassword.getPassword();
 
-    AccountEntity accountEntity = loginService.findUsername(insertAccountPassword.getAccount(),
-        insertAccountPassword.getPassword());
+    if (account != null || password != null) {//如果不為空
+      accountEntity = loginService.findUsername(account,
+          password);
+      //存到session
+      session.setAttribute("name", account);
+      session.setAttribute("pwd", password);
+    } else {//如果為空
+      accountEntity = loginService.findUsername(session.getAttribute("name").toString(),
+          session.getAttribute("pwd").toString());
+    }
+//    System.out.println("session = " + session.getAttribute("name"));
+//    System.out.println("session = " + session.getAttribute("pwd"));
     if (accountEntity == null) {
-      System.out.println("null");
       return "login/LoginShow";
     } else {
-      System.out.println("not null");
-      model.addAttribute("insertAccountPassword", accountEntity);
+      System.out.println(accountEntity);
+      model.addAttribute("showAccountPassword", accountEntity);
       return "menu/Home";
     }
-
-
   }
-
 
 }

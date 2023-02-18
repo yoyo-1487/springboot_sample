@@ -6,13 +6,20 @@
 </head>
 <body>
 <h2>點餐</h2>
-<form th:action="@{/andOrder}" th:object="${addInformationToMenu}" method="post">
+<form th:action="@{/andOrder}" th:object="${addInformationToMenu}" method="get">
   <input type="text" th:field="*{items}"/>
+
   <input type="submit" value="點餐">
 </form>
 <br>
-<form th:action="@{/home}" method="post">
+<form th:action="@{/home}" method="get">
   <button type="submit" value="回首頁">回首頁</button>
 </form>
+
+<div>
+  <h1>顯示帳號密碼資料</h1>
+  <p th:text="'帳號為:'+${showAccountPassword.username}"></p>
+  <p th:text="'密碼為:'+${showAccountPassword.password}"></p>
+</div>
 </body>
 </html>
