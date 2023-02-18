@@ -2,6 +2,7 @@ package com.example.menu.aggregate;
 
 import com.example.menu.model.dao.OrderDao;
 import com.example.menu.model.entity.OrderEntity;
+import jakarta.persistence.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -19,8 +20,8 @@ public class OrderAggregate {
    *
    * @return 菜單
    */
-  public List<OrderEntity> getOrderAll() {
-    return orderDao.findAll();
+  public List<OrderEntity> getOrderAll(String username) {
+    return orderDao.findByUsername(username);
   }
 
   /**

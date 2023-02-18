@@ -11,9 +11,11 @@ public class OrderEntity {
   @Id
   @Column(name = "order_id")
   private String orderId;
-  @Column
+  @Column(name = "order_item")
   private String orderItem;
-  @Column
+  @Column(name = "order_price")
   private Integer orderPrice;
+  @Column(name = "order_username")
+  private String orderUsername;
 }
 

@@ -15,14 +15,14 @@ public class OrderService {
   OrderAggregate orderAggregate;
 
   //------------得到訂單資料(項目,數量)------------
-  public HashMap<String, Integer> getOrderItemAndNumber() {
-    List<OrderEntity> orderListAll = orderAggregate.getOrderAll();//1.撈出訂單所有資料
+  public HashMap<String, Integer> getOrderItemAndNumber(String username) {
+    List<OrderEntity> orderListAll = orderAggregate.getOrderAll(username);//1.撈出訂單所有資料
     return orderAggregate.findObjectAndCountAmount(orderListAll);//2.找出訂單有哪些種類,並累加數量
   }
 
   //
-  public Integer countPrice() {
-    List<OrderEntity> orderListAll = orderAggregate.getOrderAll();//1.撈出訂單所有資料
+  public Integer countPrice(String username) {
+    List<OrderEntity> orderListAll = orderAggregate.getOrderAll(username);//1.撈出訂單所有資料
     return orderAggregate.countPrice(orderListAll);
   }
 

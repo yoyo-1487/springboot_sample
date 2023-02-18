@@ -29,15 +29,6 @@ public class LoginController {
     return "login/Login";
   }
 
-//  @PostMapping("/logincheck")
-//  public String
-//  logincheck(@ModelAttribute InsertAccountandPasswordToLoginCommand insertAccountPassword,
-//      Model model) {
-//    model.addAttribute("insertAccountPassword",
-//        loginService.findUsername(insertAccountPassword.getAccount(),
-//            insertAccountPassword.getPassword()));
-//    return "login/LoginShow";
-//  }
 
   @GetMapping("/home")
   public String home(
@@ -65,7 +56,6 @@ public class LoginController {
     if (accountEntity == null) {
       return "login/LoginShow";
     } else {
-      System.out.println(accountEntity);
       model.addAttribute("showAccountPassword", accountEntity);
       return "menu/Home";
     }

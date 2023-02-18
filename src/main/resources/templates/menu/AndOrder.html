@@ -6,11 +6,11 @@
 </head>
 <body>
 <h1>顯示資料</h1>
-<div th:if="${addInformationToMenu != null}">
-  <p th:text="'餐點為:'+${addInformationToMenu.orderItem}"></p>
-  <p th:text="'價格為:'+${addInformationToMenu.orderPrice}"></p>
+<div th:if="${find != null}">
+  <p th:text="'餐點為:'+${find.orderItem}"></p>
+  <p th:text="'價格為:'+${find.orderPrice}"></p>
 </div>
-<div th:if="${addInformationToMenu == null}">
+<div th:if="${find == null}">
   <p >不存在</p>
 </div>
 <div>

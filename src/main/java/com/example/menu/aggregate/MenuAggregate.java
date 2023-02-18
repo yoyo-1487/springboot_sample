@@ -43,7 +43,7 @@ public class MenuAggregate {
    * @param item 輸入品項的資料
    * @return 成功點餐資訊
    */
-  public OrderEntity existThenOrder(Optional<MenuEntity> item) {
+  public OrderEntity existThenOrder(Optional<MenuEntity> item, String username) {
     if (item.isEmpty()) {
       return null;
     } else {
@@ -51,6 +51,7 @@ public class MenuAggregate {
       order.setOrderId(UUID.randomUUID().toString());
       order.setOrderItem(item.get().getItems());
       order.setOrderPrice(item.get().getPrice());
+      order.setOrderUsername(username);
       orderDao.save(order);//-----將值寫入table_menu
       return order;
       //return "成功點餐,餐點為:" + item.get().getItems() + ",價格:" + item.get().getPrice();

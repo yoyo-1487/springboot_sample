@@ -7,4 +7,5 @@ public class AddInformationToMenuCommand {
 
   private String items;
   private String price;
+  private String username;
 }
