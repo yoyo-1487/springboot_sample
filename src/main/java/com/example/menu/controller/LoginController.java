@@ -54,7 +54,7 @@ public class LoginController {
 
     //----------判斷帳號密碼是否正確----------
     if (accountEntity == null) {
-      return "login/LoginShow";
+      return "login/LoginError";
     } else {
       model.addAttribute("showAccountPassword", accountEntity);
       return "menu/Home";

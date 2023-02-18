@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
+
   @Autowired
   private LoginAggregate loginAggregate;
 
-  public AccountEntity findUsername(String username, String password){
+  public AccountEntity findUsername(String username, String password) {
     return loginAggregate.findUsername(username, password);
   }
 

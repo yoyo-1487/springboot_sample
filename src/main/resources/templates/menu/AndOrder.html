@@ -11,7 +11,7 @@
   <p th:text="'價格為:'+${find.orderPrice}"></p>
 </div>
 <div th:if="${find == null}">
-  <p >不存在</p>
+  <p>不存在</p>
 </div>
 <div>
   <form th:action="@{/find}" method="get">

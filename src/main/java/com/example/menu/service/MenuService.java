@@ -21,7 +21,8 @@ public class MenuService {
 
   //------------找菜單是否有此品項並點餐------------
   public OrderEntity findAndOrder(String item, String username) {
-    Optional<MenuEntity> find_and_order = menuaggregate.findMenuByItem(item);//1.品項,find_and_order=輸入的品項
+    Optional<MenuEntity> find_and_order = menuaggregate.findMenuByItem(
+        item);//1.品項,find_and_order=輸入的品項
     return menuaggregate.existThenOrder(find_and_order, username);//2.判斷品項存在並加入
   }
 
