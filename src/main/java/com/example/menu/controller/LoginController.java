@@ -49,19 +49,19 @@ public class LoginController {
     HttpSession session = request.getSession();
     String account = insertAccountPassword.getAccount();
     String password = insertAccountPassword.getPassword();
-
+    //-----------判斷傳入值是否為空----------
     if (account != null || password != null) {//如果不為空
-      accountEntity = loginService.findUsername(account,
-          password);
+      accountEntity = loginService.findUsername(account, password);
       //存到session
       session.setAttribute("name", account);
       session.setAttribute("pwd", password);
     } else {//如果為空
+      //從session撈資料
       accountEntity = loginService.findUsername(session.getAttribute("name").toString(),
           session.getAttribute("pwd").toString());
     }
-//    System.out.println("session = " + session.getAttribute("name"));
-//    System.out.println("session = " + session.getAttribute("pwd"));
+
+    //----------判斷帳號密碼是否正確----------
     if (accountEntity == null) {
       return "login/LoginShow";
     } else {
