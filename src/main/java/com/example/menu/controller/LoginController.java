@@ -35,13 +35,15 @@ public class LoginController {
   @GetMapping("/registerSave")
   public String registerSave(@ModelAttribute InsertAccountPasswordCommand registerNewAccount,
       Model model) {
-    if (registerNewAccount.getAccount().isEmpty() || registerNewAccount.getPassword().isEmpty()) {//帳密為空
+    if (registerNewAccount.getAccount().isEmpty() || registerNewAccount.getPassword()
+        .isEmpty()) {//帳密為空
       return "register/RegisterEmpty";
     } else {
       if (loginService.findAccount(registerNewAccount.getAccount()) == false) {//帳號存在
         return "register/RegisterError";
       } else {
-        if (!registerNewAccount.getPassword().equals(registerNewAccount.getPasswordCheck())) {//輸入密碼要相同
+        if (!registerNewAccount.getPassword()
+            .equals(registerNewAccount.getPasswordCheck())) {//輸入密碼要相同
           return "register/PasswordCheckErr";
         } else {
           loginService.saveAccount(registerNewAccount.getAccount(),

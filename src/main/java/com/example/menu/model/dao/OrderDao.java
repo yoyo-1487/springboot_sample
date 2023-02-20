@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface OrderDao extends JpaRepository<OrderEntity, String> {
+
   @Query("SELECT o FROM OrderEntity o WHERE o.orderUsername = :username")
   List<OrderEntity> findByUsername(@Param("username") String username);
 }
