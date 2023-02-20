@@ -1,12 +1,14 @@
 package com.example.menu.controller;
 
 import com.example.menu.controller.request.AddInformationToMenuCommand;
+import com.example.menu.model.dao.MenuDao;
 import com.example.menu.model.entity.AccountEntity;
 import com.example.menu.service.MenuService;
 import com.example.menu.service.OrderService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ public class MenuController {
   MenuService menuService;
   @Autowired
   OrderService orderService;
+  @Autowired
+  MenuDao menuDao;
+
 
   //------------拿到菜單------------
   @GetMapping("/getmenu")
@@ -67,6 +72,7 @@ public class MenuController {
 
     model.addAttribute("showAccountPassword", accountEntity);
     model.addAttribute("addInformationToMenu", addInformationToMenuCommand);//使用者已經設定好，餐點至點餐畫面設定
+    model.addAttribute("menuItems", menuDao.findAll());//從資料庫撈菜單顯示在點餐欄
     return "menu/Find"; // 導至find.html
   }
 

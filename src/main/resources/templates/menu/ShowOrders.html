@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <h2>訂單</h2>
   <meta charset="UTF-8">
   <title>showOrders</title>
 </head>
 <body>
-<h3 th:text="'訂單金額 : ' + ${totalprice}"></h3>
-<table border="1">
-  <tr>
-    <th>菜名</th>
-    <th>數量</th>
-  </tr>
-  <!--用th:each接收一個可迭代的物件，將thymeleaf傳遞過來的參數"findMenuAll"，別名為menu-->
-  <tr th:each="order:${getOrderList}">
-    <td th:text="${order.key}"></td>
-    <td th:text="${order.value}"></td>
-  </tr>
-</table>
-<br>
-
-<form th:action="@{/home}" method="get">
-  <button type="submit" value="回首頁">回首頁</button>
-</form>
-
 <div>
-  <h1>顯示帳號密碼資料</h1>
-  <p th:text="'帳號為:'+${showAccountPassword.username}"></p>
-  <!--p th:text="'密碼為:'+${showAccountPassword.password}"></p-->
+  <h2 th:text="'使用者:'+${showAccountPassword.username}"></h2>
 </div>
-
-</body>
+<div></div>
+<h2>訂單</h2>
+<h3 th:text="'訂單金額 : ' + ${totalprice}"></h3>
+</div>
+<div>
+  <table border="1">
+    <tr>
+      <th>菜名</th>
+      <th>數量</th>
+    </tr>
+    <!--用th:each接收一個可迭代的物件，將thymeleaf傳遞過來的參數"findMenuAll"，別名為menu-->
+    <tr th:each="order:${getOrderList}">
+      <td th:text="${order.key}"></td>
+      <td th:text="${order.value}"></td>
+    </tr>
+  </table>
+</div>
+<br>
+<div>
+  <form th:action="@{/home}" method="get">
+    <button type="submit" value="回首頁">回首頁</button>
+  </form>
+</div>
 </body>
 </html>

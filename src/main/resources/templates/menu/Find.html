@@ -5,9 +5,20 @@
   <title>AddInformationToMenuCommand</title>
 </head>
 <body>
+<div>
+  <h2 th:text="'使用者:'+${showAccountPassword.username}"></h2>
+  <!--p th:text="'密碼為:'+${showAccountPassword.password}"></p-->
+</div>
 <h2>點餐</h2>
 <form th:action="@{/andOrder}" th:object="${addInformationToMenu}" method="get">
-  <input type="text" th:field="*{items}"/>
+  <!--input type="text" th:field="*{items}"/-->
+  <select th:field="*{items}">
+    <option th:each="option : ${menuItems}"
+            th:value="${option.items}"
+            th:text="${option.items}">
+    </option>
+  </select>
+
   <input type="hidden" th:field="*{username}"/>
   <input type="submit" value="點餐">
 </form>
@@ -15,11 +26,5 @@
 <form th:action="@{/home}" method="get">
   <button type="submit" value="回首頁">回首頁</button>
 </form>
-
-<div>
-  <h1>顯示帳號密碼資料</h1>
-  <p th:text="'帳號為:'+${showAccountPassword.username}"></p>
-  <!--p th:text="'密碼為:'+${showAccountPassword.password}"></p-->
-</div>
 </body>
 </html>

@@ -12,13 +12,13 @@
     <input type="text" th:field="*{account}">
     <label>密碼</label>
     <input type="password" th:field="*{password}">
-    <label>密碼</label>
+    <label>確認密碼</label>
     <input type="password" th:field="*{passwordCheck}">
-    <input type="submit" value="註冊">
+    <input type="submit" value="註冊"><br>
   </form>
 </div>
 <div>
-  <a th:href="@{/login}">回去註冊</a>
+  <a th:href="@{/login}">回登入</a>
 </div>
 </body>
 </html>
