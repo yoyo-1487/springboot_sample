@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+</head>
+<body>
+<div>
+  <h1>會員註冊</h1>
+  <form action="#" th:action="@{/registerSave}" th:object="${registerNewAccount}" method="get">
+    <label>帳號/Email</label>
+    <input type="text" th:field="*{account}">
+    <label>密碼</label>
+    <input type="password" th:field="*{password}">
+    <label>密碼</label>
+    <input type="password" th:field="*{passwordCheck}">
+    <input type="submit" value="註冊">
+  </form>
+</div>
+<div>
+  <a th:href="@{/login}">回去註冊</a>
+</div>
+</body>
+</html>

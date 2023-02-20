@@ -25,4 +25,20 @@ public class LoginAggregate {
     }
   }
 
+  public boolean findAccount(String account) {
+    Optional<AccountEntity> user = loginDao.findById(account);
+    if (user.isPresent()) {
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  public void saveAccount(String username, String password) {
+    AccountEntity accountEntity= new AccountEntity();
+    accountEntity.setUsername(username);
+    accountEntity.setPassword(password);
+    loginDao.save(accountEntity);
+  }
+
 }

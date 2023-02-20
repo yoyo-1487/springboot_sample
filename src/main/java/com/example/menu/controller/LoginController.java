@@ -1,6 +1,6 @@
 package com.example.menu.controller;
 
-import com.example.menu.controller.request.InsertAccountandPasswordToLoginCommand;
+import com.example.menu.controller.request.InsertAccountPasswordCommand;
 import com.example.menu.model.dao.LoginDao;
 import com.example.menu.model.entity.AccountEntity;
 import com.example.menu.service.LoginService;
@@ -11,9 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class LoginController {
@@ -25,14 +22,38 @@ public class LoginController {
 
   @GetMapping({"/", "/login"})
   public String login(Model model) {
-    model.addAttribute("insertAccountPassword", new InsertAccountandPasswordToLoginCommand());
+    model.addAttribute("insertAccountPassword", new InsertAccountPasswordCommand());
     return "login/Login";
+  }
+
+  @GetMapping("/register")
+  public String register(Model model) {
+    model.addAttribute("registerNewAccount", new InsertAccountPasswordCommand());
+    return "register/Register";
+  }
+
+  @GetMapping("/registerSave")
+  public String registerSave(@ModelAttribute InsertAccountPasswordCommand registerNewAccount,
+      Model model) {
+    System.out.println("registerNewAccount.getAccount() = " + registerNewAccount.getAccount());
+    System.out.println("registerNewAccount.getPassword() = " + registerNewAccount.getPassword());
+    System.out.println("registerNewAccount.getPasswordCheck() = " + registerNewAccount.getPasswordCheck());
+    if (loginService.findAccount(registerNewAccount.getAccount()) == false) {
+      return "register/RegisterError";
+    } else {
+      if(!registerNewAccount.getPassword().equals(registerNewAccount.getPasswordCheck())){
+        return "register/PasswordCheckErr";
+      } else {
+        loginService.saveAccount(registerNewAccount.getAccount(),registerNewAccount.getPassword());
+        return "register/RegisterSuc";
+      }
+    }
   }
 
 
   @GetMapping("/home")
   public String home(
-      @ModelAttribute InsertAccountandPasswordToLoginCommand insertAccountPassword,
+      @ModelAttribute InsertAccountPasswordCommand insertAccountPassword,
       Model model,
       HttpServletRequest request
   ) {

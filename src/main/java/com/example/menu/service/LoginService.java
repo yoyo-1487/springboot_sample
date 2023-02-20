@@ -1,7 +1,6 @@
 package com.example.menu.service;
 
 import com.example.menu.aggregate.LoginAggregate;
-import com.example.menu.model.dao.LoginDao;
 import com.example.menu.model.entity.AccountEntity;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,14 @@ public class LoginService {
 
   public AccountEntity findUsername(String username, String password) {
     return loginAggregate.findUsername(username, password);
+  }
+
+  public boolean findAccount(String account) {
+    return loginAggregate.findAccount(account);
+  }
+
+  public void saveAccount(String username, String password) {
+    loginAggregate.saveAccount(username, password);
   }
 
 }
