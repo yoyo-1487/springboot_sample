@@ -1,8 +1,12 @@
 package com.example.menu.aggregate;
 
+import com.example.menu.controller.request.AddInformationToMenuCommand;
 import com.example.menu.model.dao.OrderDao;
+import com.example.menu.model.entity.AccountEntity;
 import com.example.menu.model.entity.OrderEntity;
 import jakarta.persistence.Id;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -67,5 +71,19 @@ public class OrderAggregate {
     }
     return totalprice;
   }
+
+  //
+  public AddInformationToMenuCommand isNull(String username, HttpSession session) {
+    AddInformationToMenuCommand addInformationToMenuCommand = new AddInformationToMenuCommand();//點餐資訊
+    if (username != null) {
+      session.setAttribute("name", username);//存到session
+      addInformationToMenuCommand.setUsername(username);//設定哪位使用者點餐
+    }else {//如果為空
+      //從session撈資料
+      addInformationToMenuCommand.setUsername(session.getAttribute("name").toString());//設定哪位使用者點餐
+    }
+    return addInformationToMenuCommand;
+  }
+
 
 }

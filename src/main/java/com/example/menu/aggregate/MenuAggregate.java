@@ -54,7 +54,6 @@ public class MenuAggregate {
       order.setOrderUsername(username);
       orderDao.save(order);//-----將值寫入table_menu
       return order;
-      //return "成功點餐,餐點為:" + item.get().getItems() + ",價格:" + item.get().getPrice();
     }
   }
 

@@ -49,49 +49,19 @@ public class MenuController {
 
   //------------找菜單是否有此品項並點餐------------
   @GetMapping("/find")
-  public String form(Model model,
-      @ModelAttribute AccountEntity showInfoOnGetmenu,
+  public String find(Model model, @ModelAttribute AccountEntity showInfoOnGetmenu,
       HttpServletRequest request) {
-
-    AccountEntity accountEntity = new AccountEntity();//登入者資訊
-
-    AddInformationToMenuCommand addInformationToMenuCommand = new AddInformationToMenuCommand();
-
-    HttpSession session = request.getSession();
-    String username = showInfoOnGetmenu.getUsername();
-    //-----------判斷傳入值是否為空----------
-    if (username != null) {//如果不為空
-      accountEntity.setUsername(username);
-      session.setAttribute("name", username);//存到session
-      addInformationToMenuCommand.setUsername(username);//設定哪位使用者點餐
-    } else {//如果為空
-      //從session撈資料
-      accountEntity.setUsername(session.getAttribute("name").toString());
-      addInformationToMenuCommand.setUsername(session.getAttribute("name").toString());//設定哪位使用者點餐
-    }
-
-    model.addAttribute("showAccountPassword", accountEntity);
-    model.addAttribute("addInformationToMenu", addInformationToMenuCommand);//使用者已經設定好，餐點至點餐畫面設定
-    model.addAttribute("menuItems", menuDao.findAll());//從資料庫撈菜單顯示在點餐欄
+    model.addAttribute("addInformationToMenu", orderService.setUser(showInfoOnGetmenu.getUsername(),
+        request.getSession()));//使用者已經設定好，餐點至點餐畫面設定
+    model.addAttribute("menuItems", menuService.getMenuAll());//從資料庫撈菜單顯示在點餐欄
     return "menu/Find"; // 導至find.html
   }
 
   @GetMapping("/andOrder")
-  public String findAndOrder(
-      @ModelAttribute AddInformationToMenuCommand find,
+  public String andOrder(@ModelAttribute AddInformationToMenuCommand find,
       Model model) {//@RequestBody AddInformationToMenuCommand command
-    model.addAttribute("find",
-        menuService.findAndOrder(find.getItems(),
-            find.getUsername()));
+    model.addAttribute("find", menuService.findAndOrder(find.getItems(), find.getUsername()));
     return "menu/AndOrder";
     //return menuService.findAndOrder(command.getItems());
   }
-
-  //-----------得到訂單總金額------------
-//  @GetMapping("/countprice")
-//  public String countPrice(Model model) {//Integer
-//    model.addAttribute("totalprice", orderService.countPrice());
-//    return "menu/ShowPrice";
-//    //return orderService.countPrice();
-//  }
 }
