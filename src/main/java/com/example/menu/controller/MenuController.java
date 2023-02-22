@@ -1,6 +1,7 @@
 package com.example.menu.controller;
 
 import com.example.menu.controller.request.AddInformationToMenuCommand;
+import com.example.menu.controller.request.DelOrderCommand;
 import com.example.menu.model.dao.MenuDao;
 import com.example.menu.model.entity.AccountEntity;
 import com.example.menu.service.MenuService;
@@ -8,7 +9,6 @@ import com.example.menu.service.OrderService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -64,4 +64,31 @@ public class MenuController {
     return "menu/AndOrder";
     //return menuService.findAndOrder(command.getItems());
   }
+
+  //------------del
+  @GetMapping("/chooseDel")
+  public String chooseOrder(Model model, @ModelAttribute AccountEntity showInfoOnDelOrder,
+      HttpServletRequest request) {
+    HttpSession session = request.getSession();
+    AccountEntity account=new AccountEntity();
+    if(showInfoOnDelOrder.getUsername()==null){
+      account.setUsername(session.getAttribute("username").toString());
+    }else{
+      session.setAttribute("username",showInfoOnDelOrder.getUsername());
+      account.setUsername(showInfoOnDelOrder.getUsername());
+    }
+    model.addAttribute("addInformationToDel", orderService.setUser(account.getUsername(),
+        request.getSession()));//使用者已經設定好，刪除餐點至畫面設定
+    model.addAttribute("OrderItems",
+        orderService.chooseOrder(account.getUsername()));//從資料庫撈已點項目顯示在點餐欄
+    return "menu/ChooseDel";
+  }
+
+  @GetMapping("/andDel")
+  public String andDel(@ModelAttribute AddInformationToMenuCommand nameAndItem,
+      Model model) {
+    orderService.selectIdByUsernameAndItem(nameAndItem.getUsername(), nameAndItem.getItems());
+    return "menu/DelSuc";
+  }
+
 }

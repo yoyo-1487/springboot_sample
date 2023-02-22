@@ -2,11 +2,9 @@ package com.example.menu.service;
 
 import com.example.menu.aggregate.OrderAggregate;
 import com.example.menu.controller.request.AddInformationToMenuCommand;
-import com.example.menu.model.entity.AccountEntity;
+import com.example.menu.model.dao.OrderDao;
 import com.example.menu.model.entity.OrderEntity;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +16,8 @@ public class OrderService {
 
   @Autowired
   OrderAggregate orderAggregate;
+  @Autowired
+  private OrderDao orderDao;
 
   //------------得到訂單資料(項目,數量)------------
   public HashMap<String, Integer> getOrderItemAndNumber(String username) {
@@ -32,9 +32,18 @@ public class OrderService {
   }
 
   //
-  public AddInformationToMenuCommand setUser(String username, HttpSession session){
+  public AddInformationToMenuCommand setUser(String username, HttpSession session) {
     //判斷傳入質是否為空,並設定Username
     return orderAggregate.isNull(username, session);
+  }
+
+
+  public List<OrderEntity> chooseOrder(String username){
+    return orderAggregate.getOrderAll(username);
+  }
+
+  public void selectIdByUsernameAndItem(String username, String item) {
+    orderAggregate.selectIdByUsernameAndItem(username, item);
   }
 
 

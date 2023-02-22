@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>ChooseDel</title>
+</head>
+<body>
+<div>
+  <h2 th:text="'使用者:'+${addInformationToDel.username}"></h2>
+  <!--p th:text="'密碼為:'+${showAccountPassword.password}"></p-->
+</div>
+<h2>點餐</h2>
+<form th:action="@{/andDel}" th:object="${addInformationToDel}" method="get">
+  <!--input type="text" th:field="*{items}"/-->
+  <select th:field="*{items}">
+    <option th:each="option : ${OrderItems}"
+            th:value="${option.orderItem}"
+            th:text="${option.orderItem}">
+    </option>
+  </select>
+  <input type="hidden" th:field="*{username}"/>
+  <input type="submit" value="刪除餐點">
+</form>
+<br>
+<form th:action="@{/home}" method="get">
+  <button type="submit" value="回首頁">回首頁</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>DelSuc</title>
+</head>
+<body>
+<!--h1>顯示資料</h1>
+<div th:if="${find != null}">
+  <p th:text="'餐點為:'+${find.orderItem}"></p>
+  <p th:text="'價格為:'+${find.orderPrice}"></p>
+</div>
+<div th:if="${find == null}">
+  <p>不存在</p>
+</div-->
+<p>已刪除</p>
+<div>
+  <form th:action="@{/chooseDel}" method="get">
+    <button type="submit" value="繼續刪除">繼續刪除</button>
+  </form>
+  <br>
+  <form th:action="@{/home}" method="get">
+    <button type="submit" value="回首頁">回首頁</button>
+  </form>
+</div>
+</body>
+</html>
