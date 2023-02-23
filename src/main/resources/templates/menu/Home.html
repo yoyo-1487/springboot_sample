@@ -42,10 +42,16 @@
       <input type="submit" value="取消餐點">
     </form>
   </div>
-
+  <br>
+  <div>
+    <form action="#" th:action="@{/changePwd}" th:object="${showAccountPassword}" method="get">
+      <input type="hidden" th:field="*{username}"/>
+      <!input type="hidden" th:field="*{password}"/>
+      <input type="submit" value="更改密碼">
+    </form>
+  </div>
 </div>
 <br>
-
 <div>
   <a th:href="@{/login}">回登入頁面</a>
 </div>

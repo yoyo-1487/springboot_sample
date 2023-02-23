@@ -2,6 +2,8 @@ package com.example.menu.controller;
 
 import com.example.menu.controller.request.AddInformationToMenuCommand;
 import com.example.menu.controller.request.DelOrderCommand;
+import com.example.menu.controller.request.InsertAccountPasswordCommand;
+import com.example.menu.model.dao.LoginDao;
 import com.example.menu.model.dao.MenuDao;
 import com.example.menu.model.entity.AccountEntity;
 import com.example.menu.service.MenuService;
@@ -9,6 +11,7 @@ import com.example.menu.service.OrderService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +25,7 @@ public class MenuController {
   @Autowired
   OrderService orderService;
   @Autowired
-  MenuDao menuDao;
+  LoginDao loginDao;
 
 
   //------------拿到菜單------------
@@ -65,30 +68,69 @@ public class MenuController {
     //return menuService.findAndOrder(command.getItems());
   }
 
-  //------------del
+  //------------刪除功能,由username找出訂單在撈出來顯示------------
   @GetMapping("/chooseDel")
   public String chooseOrder(Model model, @ModelAttribute AccountEntity showInfoOnDelOrder,
-      HttpServletRequest request) {
+      HttpServletRequest request) {//showInfoOnDelOrder=使用者帳號
     HttpSession session = request.getSession();
-    AccountEntity account=new AccountEntity();
-    if(showInfoOnDelOrder.getUsername()==null){
+    AccountEntity account = new AccountEntity();
+    if (showInfoOnDelOrder.getUsername() == null) {//回到頁面時showInfoOnDelOrder會是空,所以要存起來
       account.setUsername(session.getAttribute("username").toString());
-    }else{
-      session.setAttribute("username",showInfoOnDelOrder.getUsername());
+    } else {
+      session.setAttribute("username", showInfoOnDelOrder.getUsername());
       account.setUsername(showInfoOnDelOrder.getUsername());
     }
     model.addAttribute("addInformationToDel", orderService.setUser(account.getUsername(),
         request.getSession()));//使用者已經設定好，刪除餐點至畫面設定
-    model.addAttribute("OrderItems",
-        orderService.chooseOrder(account.getUsername()));//從資料庫撈已點項目顯示在點餐欄
-    return "menu/ChooseDel";
+    if (!orderService.chooseOrder(account.getUsername()).isEmpty()) {
+      model.addAttribute("OrderItems",
+          orderService.chooseOrder(account.getUsername()));//從資料庫撈已點項目顯示在點餐欄
+      return "menu/ChooseDel";
+    } else {
+      return "menu/OrderIsEmpty";
+    }
+
   }
 
   @GetMapping("/andDel")
-  public String andDel(@ModelAttribute AddInformationToMenuCommand nameAndItem,
-      Model model) {
+  public String andDel(@ModelAttribute AddInformationToMenuCommand nameAndItem) {
     orderService.selectIdByUsernameAndItem(nameAndItem.getUsername(), nameAndItem.getItems());
     return "menu/DelSuc";
   }
 
+  //-------------------------------------
+  @GetMapping("/changePwd")
+  public String changePwd(@ModelAttribute AddInformationToMenuCommand name, Model model) {
+    InsertAccountPasswordCommand insertAccountPasswordCommand = new InsertAccountPasswordCommand();
+    insertAccountPasswordCommand.setAccount(name.getUsername());
+    model.addAttribute("setNewPwd", insertAccountPasswordCommand);
+    return "ChangePwd/ChangePwd";
+  }
+
+  @GetMapping("/changePwdCk")
+  public String changePwdCk(@ModelAttribute InsertAccountPasswordCommand check,Model model) {
+    AccountEntity account = loginDao.findById(check.getAccount()).get();//由user找到帳號資料
+    if(check.getPassword().isEmpty()||check.getPasswordCheck().isEmpty()){
+      //error密碼與確認密碼為空
+      return "ChangePwd/ChangePwdEmp";
+    }else{
+      if(!(check.getPassword().equals(account.getPassword()))){
+        //error原密碼輸入錯誤
+        return "ChangePwd/ChangePwdErr";
+      }else{
+        if(check.getPasswordCheck().equals(account.getPassword())){
+          //error新密碼與原密碼相同
+          return "ChangePwd/ChangePwdSame";
+        }else{
+          account.setPassword(check.getPasswordCheck());//更新成新的password
+          loginDao.save(account);//存到資料庫
+          check.setPassword(check.getPasswordCheck());//將傳遞回home的密碼設定成新密碼
+          model.addAttribute("sentToHome",check);
+          return "ChangePwd/ChangePwdSuc";
+        }
+
+      }
+    }
+
+  }
 }
