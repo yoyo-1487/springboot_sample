@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class AddItemPriceIntoMenu {
+
   private String item;
   private Integer price;
 }

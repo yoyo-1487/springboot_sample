@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AdminAccountDao extends JpaRepository<AdminAccountEntity, Long> {
+
   @Query("SELECT o FROM AdminAccountEntity o WHERE o.adminName = :adminName")
   Optional<AdminAccountEntity> findByAdminName(@Param("adminName") String adminName);
 }

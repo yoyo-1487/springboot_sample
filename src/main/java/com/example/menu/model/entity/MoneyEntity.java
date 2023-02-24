@@ -7,6 +7,7 @@ import lombok.Data;
 @Entity
 @Table(name = "money")
 public class MoneyEntity {
+
   @Id
   @Column(name = "id")
   private Integer id;

@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class InputIdPwd {
+
   private Integer id;
   private String password;
 }

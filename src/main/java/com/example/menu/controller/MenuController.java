@@ -105,24 +105,24 @@ public class MenuController {
   }
 
   @GetMapping("/changePwdCk")
-  public String changePwdCk(@ModelAttribute InsertAccountPasswordCommand check,Model model) {
+  public String changePwdCk(@ModelAttribute InsertAccountPasswordCommand check, Model model) {
     AccountEntity account = loginDao.findById(check.getAccount()).get();//由user找到帳號資料
-    if(check.getPassword().isEmpty()||check.getPasswordCheck().isEmpty()){
+    if (check.getPassword().isEmpty() || check.getPasswordCheck().isEmpty()) {
       //error密碼與確認密碼為空
       return "ChangePwd/ChangePwdEmp";
-    }else{
-      if(!(check.getPassword().equals(account.getPassword()))){
+    } else {
+      if (!(check.getPassword().equals(account.getPassword()))) {
         //error原密碼輸入錯誤
         return "ChangePwd/ChangePwdErr";
-      }else{
-        if(check.getPasswordCheck().equals(account.getPassword())){
+      } else {
+        if (check.getPasswordCheck().equals(account.getPassword())) {
           //error新密碼與原密碼相同
           return "ChangePwd/ChangePwdSame";
-        }else{
+        } else {
           account.setPassword(check.getPasswordCheck());//更新成新的password
           loginDao.save(account);//存到資料庫
           check.setPassword(check.getPasswordCheck());//將傳遞回home的密碼設定成新密碼
-          model.addAttribute("sentToHome",check);
+          model.addAttribute("sentToHome", check);
           return "ChangePwd/ChangePwdSuc";
         }
 

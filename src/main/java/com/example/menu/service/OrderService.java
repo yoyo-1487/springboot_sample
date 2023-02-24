@@ -38,7 +38,7 @@ public class OrderService {
   }
 
 
-  public List<OrderEntity> chooseOrder(String username){
+  public List<OrderEntity> chooseOrder(String username) {
     return orderAggregate.getOrderAll(username);
   }
 
