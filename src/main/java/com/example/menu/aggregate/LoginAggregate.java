@@ -1,9 +1,8 @@
 package com.example.menu.aggregate;
 
-import com.example.menu.controller.request.InsertAccountPasswordCommand;
+import com.example.menu.controller.request.user.InsertAccountPasswordCommand;
 import com.example.menu.model.dao.LoginDao;
 import com.example.menu.model.entity.AccountEntity;
-import jakarta.servlet.http.HttpSession;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

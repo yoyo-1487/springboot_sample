@@ -1,17 +1,10 @@
 package com.example.menu.aggregate;
 
-import com.example.menu.controller.request.AddInformationToMenuCommand;
+import com.example.menu.controller.request.user.AddInformationToMenuCommand;
 import com.example.menu.model.dao.OrderDao;
-import com.example.menu.model.entity.AccountEntity;
 import com.example.menu.model.entity.OrderEntity;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Id;
-import jakarta.persistence.PersistenceContext;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;

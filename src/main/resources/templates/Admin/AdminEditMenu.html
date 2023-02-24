@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>AdminEditMenu</title>
+</head>
+<body>
+<h3>更動價格</h3>
+<div>
+  <form th:action="@{/AdminEditMenuSuc}" th:object="${editMenu}" method="get">
+    <label>品項</label>
+    <select th:field="*{item}">
+      <option th:each="option : ${menu}"
+              th:value="${option.items}"
+              th:text="${option.items}">
+      </option>
+    </select>
+    <label>價格(整數)</label>
+    <input type="text" th:field="*{price}" onkeyup="value=this.value.replace(/\D+/g,'')"/>
+    <input type="submit" value="更改">
+  </form>
+</div>
+<div>
+  <a th:href="@{/AdminLoginSuc}">回首頁</a>
+</div>
+<div>
+  <a th:href="@{/AdminLogin}">登出</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>AdminDelMenu</title>
+</head>
+<body>
+<h3>刪除菜單</h3>
+<div>
+  <form th:action="@{/AdminDelMenuSuc}" th:object="${delMenu}" method="get">
+    <label>品項</label>
+    <select th:field="*{item}">
+      <option th:each="option : ${menu}"
+              th:value="${option.items}"
+              th:text="${option.items}">
+      </option>
+    </select>
+    <input type="submit" value="刪除">
+  </form>
+</div>
+<div>
+  <a th:href="@{/AdminLoginSuc}">回首頁</a>
+</div>
+<div>
+  <a th:href="@{/AdminLogin}">登出</a>
+</div>
+</body>
+</html>

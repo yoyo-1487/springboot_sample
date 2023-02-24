@@ -1,7 +1,7 @@
 package com.example.menu.service;
 
 import com.example.menu.aggregate.OrderAggregate;
-import com.example.menu.controller.request.AddInformationToMenuCommand;
+import com.example.menu.controller.request.user.AddInformationToMenuCommand;
 import com.example.menu.model.dao.OrderDao;
 import com.example.menu.model.entity.OrderEntity;
 import jakarta.servlet.http.HttpSession;

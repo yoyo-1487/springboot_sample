@@ -1,6 +1,6 @@
 package com.example.menu.controller;
 
-import com.example.menu.controller.request.InsertAccountPasswordCommand;
+import com.example.menu.controller.request.user.InsertAccountPasswordCommand;
 import com.example.menu.model.dao.LoginDao;
 import com.example.menu.model.entity.AccountEntity;
 import com.example.menu.service.LoginService;

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h3>增加品項</h3>
+<div>
+  <form th:action="@{/adminAddMenuSuc}" th:object="${addMenu}" method="get">
+    <label>品項</label>
+    <input type="text" th:field="*{item}"/>
+    <label>價格(整數)</label>
+    <input type="text" th:field="*{price}" onkeyup="value=this.value.replace(/\D+/g,'')"/>
+    <input type="submit" value="增加">
+  </form>
+</div>
+<div>
+  <a th:href="@{/AdminLoginSuc}">回首頁</a>
+</div>
+<div>
+  <a th:href="@{/AdminLogin}">登出</a>
+</div>
+</body>
+</html>

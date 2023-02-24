@@ -1,4 +1,4 @@
-package com.example.menu.controller.request;
+package com.example.menu.controller.request.user;
 
 import lombok.Data;
 

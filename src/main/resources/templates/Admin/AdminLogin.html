@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>AdminLogin</title>
+</head>
+<body>
+<h1>管理者登入</h1>
+<div>
+  <form th:action="@{/AdminLoginSuc}" th:object="${iptAdminAccPwd}" method="get">
+    <label>管理者帳號</label>
+    <input type="text" th:field="*{adminName}">
+    <label>管理者密碼</label>
+    <input type="password" th:field="*{adminPwd}">
+    <input type="submit" value="登入">
+  </form>
+</div>
+<div>
+  <a th:href="@{/login}">使用者登入</a>
+</div>
+</body>
+</html>
